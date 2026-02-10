@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buy Me Coffee | Support Binod Lama</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" id="themeToggle">
+      <i class="fas fa-moon"></i>
+      <i class="fas fa-sun"></i>
+    </div>
+
+    <!-- Navigation -->
+    <header class="header">
+      <nav class="navbar">
+        <a href="index.html" class="logo">BL</a>
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="index.html" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="index.html#projects" class="nav-link">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a href="index.html#contact" class="nav-link">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a href="coffee.html" class="nav-link coffee-btn active"
+              >Buy Coffee <i class="fas fa-mug-hot"></i
+            ></a>
+          </li>
+        </ul>
+        <div class="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Coffee Page Content -->
+    <main class="section" style="padding-top: 120px">
+      <div class="container">
+        <h1 class="section-title">Buy Me a Coffee</h1>
+        <div
+          class="coffee-intro"
+          style="text-align: center; max-width: 800px; margin: 0 auto 3rem"
+        >
+          <p>
+            Hi! I'm Binod, a frontend developer and IT student. If you
+            appreciate my work and want to support my journey, you can buy me a
+            coffee!
+          </p>
+          <p>
+            Your support helps me create more projects and continue learning.
+          </p>
+        </div>
+
+        <!-- Coffee Options -->
+        <div class="coffee-options">
+          <div class="coffee-option animate-bottom">
+            <div class="coffee-icon">☕</div>
+            <h3>Single Coffee</h3>
+            <p class="price">$3</p>
+            <p>A simple thank you for my work</p>
+            <button class="btn coffee-btn" data-amount="3">Buy 1 Coffee</button>
+          </div>
+
+          <div class="coffee-option animate-bottom delay-1">
+            <div class="coffee-icon">☕☕</div>
+            <h3>Double Coffee</h3>
+            <p class="price">$5</p>
+            <p>Extra motivation for coding sessions</p>
+            <button class="btn coffee-btn" data-amount="5">
+              Buy 2 Coffees
+            </button>
+          </div>
+
+          <div class="coffee-option animate-bottom delay-2">
+            <div class="coffee-icon">☕☕☕</div>
+            <h3>Triple Coffee</h3>
+            <p class="price">$10</p>
+            <p>Fuel for all-night coding sessions</p>
+            <button class="btn coffee-btn" data-amount="10">
+              Buy 3 Coffees
+            </button>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem">
+          <p>Thank you for your support! 🙏</p>
+          <a
+            href="index.html"
+            class="btn secondary-btn"
+            style="margin-top: 1rem"
+          >
+            <i class="fas fa-arrow-left"></i> Back to Portfolio
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <p>
+          &copy; <span id="currentYear"></span> Binod Lama. All rights reserved.
+        </p>
+        <div class="footer-links">
+          <a href="index.html">Home</a> |
+          <a href="index.html#contact">Contact</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Simple Coffee Page JavaScript
+      document.addEventListener("DOMContentLoaded", function () {
+        // Set current year
+        document.getElementById("currentYear").textContent =
+          new Date().getFullYear();
+
+        // Coffee buttons functionality
+        const coffeeButtons = document.querySelectorAll(
+          ".coffee-btn[data-amount]",
+        );
+
+        coffeeButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            const amount = this.getAttribute("data-amount");
+            alert(
+              `Thank you for your support of $${amount}! In a real implementation, this would redirect to a payment page.`,
+            );
+          });
+        });
+
+        // Theme toggle
+        const themeToggle = document.getElementById("themeToggle");
+        const html = document.documentElement;
+
+        const savedTheme =
+          localStorage.getItem("theme") ||
+          (window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light");
+        html.setAttribute("data-theme", savedTheme);
+
+        themeToggle.addEventListener("click", () => {
+          const currentTheme = html.getAttribute("data-theme");
+          const newTheme = currentTheme === "light" ? "dark" : "light";
+
+          html.setAttribute("data-theme", newTheme);
+          localStorage.setItem("theme", newTheme);
+
+          // Animate toggle
+          themeToggle.style.transform = "rotate(180deg) scale(0.8)";
+          setTimeout(() => {
+            themeToggle.style.transform = "rotate(0) scale(1)";
+          }, 300);
+        });
+
+        // Mobile menu toggle
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-menu");
+
+        if (hamburger) {
+          hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+          });
+        }
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll(".nav-link").forEach((link) => {
+          link.addEventListener("click", () => {
+            if (hamburger) hamburger.classList.remove("active");
+            if (navMenu) navMenu.classList.remove("active");
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
